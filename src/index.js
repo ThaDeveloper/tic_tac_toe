@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 import './index.css';
 
 function Square (props) {
-  
-    return (
-      <button className="square" onClick={props.onClick} >
+     return (
+      <button className="square btn btn-warning" onClick={props.onClick} >
       {props.value}
       </button>
     );
@@ -14,7 +16,9 @@ function Square (props) {
 
 class Board extends React.Component {
   renderSquare(i) {
+    
     return (
+      
     <Square value={this.props.squares[i]} 
     onClick={() => this.props.onClick(i)}
     />
@@ -22,7 +26,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const name ='One Awesome Board Game';
+    
     return (
       <div>
         <div className="board-row">
@@ -82,6 +86,7 @@ class Game extends React.Component {
   }
 
   render() {
+    const name ='One Awesome Board Game';
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -92,29 +97,49 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => this.jumpTo(move)} className="btn btn-info">{desc}</button>
         </li>
       );
     });
 
     let status;
+    let style;
     if (winner) {
       status = 'Winner: ' + winner;
+      style = "label label-success";
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      style = "";
     }
     return (
-      <div className="game">
-        <div className="game-board">
-        <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
+      <div className="container-fluid">
+        <div className="col-sm-6 col-sm-offset-3">
+          <div className="panel panel-default">
+            <div className="panel-header text-center">
+              <h3>{name}</h3>
+            </div>
+            <div className="panel-body">
+              <div className="game">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="game-board">
+                      <Board
+                        squares={current.squares}
+                        onClick={(i) => this.handleClick(i)}
+                      />
 
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="game-info">
+                      <div><label class={style}>{status}</label></div>
+                      <ol>{moves}</ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

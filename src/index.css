@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: rgb(132, 155, 180);
 }
 
 ol, ul {
@@ -30,6 +31,7 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 34px;
+  color: rgb(19, 18, 18);
 }
 
 .square:focus {
@@ -47,4 +49,7 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+}
+.panel-body{
+  background-color: rgb(139, 139, 139);
 }
